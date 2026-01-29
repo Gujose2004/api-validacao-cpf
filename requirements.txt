@@ -1,0 +1,3 @@
+# Lista todas as bibliotecas que a API precisa para funcionar quando for hospedada.
+fastapi
+uvicorn
