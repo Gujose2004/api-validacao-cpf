@@ -1,0 +1,18 @@
+FLUXO Atualizado bot floricultura Flora
+
+
+[Nó Pai: ValidaçãoCPF - API/Regex] 
+Entrada: #saudações OR !@Regex_Documentos
+    │
+    ├─ Slot @Regex_Documentos preenchido
+    │      │
+    │      ├─ API → $válido == true → segue fluxo normal
+    │      └─ API → $válido == false → [Nó Filho: CPF errado]
+    │
+    └─ Slot @Regex_Documentos não preenchido
+           → “Desculpe, não consegui localizar seu CPF…”
+
+[Nó Filho: CPF errado]
+    │
+    ├─ $tentativas_cpf < 3 → jump → Nó Pai (slot reativado)
+    └─ $tentativas_cpf >= 3 → jump → Transbordo

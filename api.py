@@ -28,11 +28,17 @@ def validar_cpf(cpf: str) -> bool:
         return False
     return True
     
+# Definição do endpoint para validar CPF
 @app.get("/validar_cpf/{cpf}")
 def validar_cpf_endpoint(cpf: str):
     if not validar_cpf(cpf):
-        raise HTTPException(
-            status_code=400, detail="CPF inválido"
+        raise HTTPException(    
+            status_code=202, detail={
+                "valido": False,
+                "mensagem":"CPF inválido"
+
+                }
+            
             )
     
     return{
@@ -40,4 +46,6 @@ def validar_cpf_endpoint(cpf: str):
         "válido": True
     }
 #uvicorn api:app --reload -> comando para rodar o servidor localmente
-#uvicorn api:app --host 0.0.0.0 --port 8000 
+#uvicorn api:app --host 0.0.0.0 --port 8000 -> comando para rodar o servidor na rede local
+#app.run(host="0.0.0.0", port=3000) fast
+#uvicorn api:app --port 3000 --reload - comando para rodar
